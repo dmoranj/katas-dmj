@@ -1,5 +1,4 @@
 (ns hallofmirrors.core)
-
 (import java.lang.Math)
 
 (defn get-points 
@@ -12,12 +11,13 @@
 	The integer variable n has an upper limit in (/ d w)."
   
   [x0 w d] 
-  (for [n (range (- (/ d w)) (+ 1 (/ d w)))
-        :let [xf (+ (* n w) 
-                    (* (- w x0) (Math/pow (Math/sin (* n (/ Math/PI 2))) 2) )
-                    (* x0 (Math/pow (Math/cos (* n (/ Math/PI 2))) 2) )
-                    )]]
-    xf)
+
+  (map 
+    #(+ (* % w) 
+        (* (- w x0) (Math/pow (Math/sin (* % (/ Math/PI 2))) 2) )
+        (* x0 (Math/pow (Math/cos (* % (/ Math/PI 2))) 2) )
+        )
+    (range (- (/ d w)) (+ 1 (/ d w))))
   )
 
 (defn get-reflections 
