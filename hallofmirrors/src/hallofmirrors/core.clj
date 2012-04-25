@@ -7,7 +7,7 @@
 	given the initial position, the size of the room along this axis
 	and the maximum distance.
 	
-	    xf = nw + x0 sen (3pi + npi)
+	    xf = nw + (w - x0) sen² (n · pi/2) + x0 cos² (n · pi/2)
 
 	The integer variable n has an upper limit in (/ d w)."
   
@@ -37,7 +37,6 @@
 	          :when (<= (+ (Math/pow (- x x0) 2) (Math/pow (- y y0) 2)) d-cuad)
 	          ]               
 	      (cond
-          (= (- x x0) 0) [:vertical (> (- y y0) 0)]
           (= (- y y0) 0) [:horizontal (> (- x x0) 0)]
 	        :else [(/ (- x x0) (- y y0)) (> (- x x0) 0)]
           )
