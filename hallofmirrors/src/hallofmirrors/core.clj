@@ -1,4 +1,7 @@
-(ns hallofmirrors.core)
+(ns hallofmirrors.core
+  (:use hallofmirrors.io)
+  )
+
 (import java.lang.Math)
 
 (defn get-points 
@@ -37,10 +40,22 @@
 	          :when (<= (+ (Math/pow (- x x0) 2) (Math/pow (- y y0) 2)) d-cuad)
 	          ]               
 	      (cond
-          (= (- y y0) 0) [:horizontal (> (- x x0) 0)]
+          (= y y0) [:vertical (> (- x x0) 0)]
 	        :else [(/ (- x x0) (- y y0)) (> (- x x0) 0)]
           )
         )
       )
     )
+  )
+
+(defn get-kata-results []
+  (let [tests (load-dataset "D-small-practice.in")]
+    (apply str 
+      (map #(str "Case #" (second %)": " (count (get-reflections (first %))) "\n")
+	       (->> (range 1 (+ 1 (count tests))) (interleave tests) (partition 2))))   
+    )
+  )
+
+(defn write-results []
+  (spit "kata.out" (get-kata-results))
   )
