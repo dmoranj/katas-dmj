@@ -17,3 +17,6 @@
 
 (deftest example-test-5
   (is (= 3 (count (get-reflections example-5)))))
+
+(deftest example-test-6
+  (is (= 16 (count (get-reflections example-6)))))

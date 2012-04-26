@@ -43,8 +43,9 @@
 	          ] 
 
 	       (cond
-           (= x x0) [:vertical (>= (- y y0) 0)]
-	         :else [(/ (- y y0) (- x x0)) (>= (- x x0) 0)]
+           (= x x0) [:vertical (>= y y0)]
+           (= y y0) [:horizontal (>= x x0)]
+	         :else [(/ (- y y0) (- x x0)) (>= x x0)]
            )
          )
        )
