@@ -12,15 +12,15 @@
 	    xf = nw + (w - x0) sen² (n · pi/2) + x0 cos² (n · pi/2)
 
 	The integer variable n has an upper limit in (/ d w)."
-  
   [x0 w d] 
-
-  (map 
-    #(+ (* % w) 
-        (* (- w x0) (Math/pow (Math/sin (* % (/ Math/PI 2))) 2) )
-        (* x0 (Math/pow (Math/cos (* % (/ Math/PI 2))) 2) )
-        )
-    (range (- (/ d w)) (+ 1 (/ d w))))
+  (let [limit (int (+ 1 (/ d w)))]
+	  (map 
+	    #(if (even? (int %))
+	          (+ (* % w) x0)
+	          (+ (* % w) (- w x0))
+	        )
+	    (range (- limit) limit)) 
+    )
   )
 
 (defn get-reflections 
@@ -35,17 +35,16 @@
         y-axis (get-points y0 h d)
         d-cuad (Math/pow d 2)
         ]
+    
      (set (for [x x-axis 
 	          y y-axis 
 	          :when (<= (+ (Math/pow (- x x0) 2) (Math/pow (- y y0) 2)) d-cuad)
 	          ]               
 	      (cond
-          (= y y0) [:vertical (> (- x x0) 0)]
-	        :else [(/ (- x x0) (- y y0)) (> (- x x0) 0)]
+          (= x x0) [:vertical (>= (- y y0) 0)]
+	        :else [(/ (- y y0) (- x x0)) (>= (- x x0) 0)]
           )
-        )
-      )
-    )
+    )))
   )
 
 (defn get-kata-results []

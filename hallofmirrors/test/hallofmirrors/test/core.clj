@@ -1,6 +1,16 @@
 (ns hallofmirrors.test.core
   (:use [hallofmirrors.core])
+  (:use [hallofmirrors.examples])
   (:use [clojure.test]))
 
-(deftest replace-me ;; FIXME: write
-  (is false "No tests have been written."))
+(deftest example-test-1
+  (is (= 4 (count (get-reflections example-1)))))
+
+(deftest example-test-2
+  (is (= 8 (count (get-reflections example-2)))))
+
+(deftest example-test-3
+  (is (= 68 (count (get-reflections example-3)))))
+
+(deftest example-test-4
+  (is (= 32 (count (get-reflections example-4)))))
