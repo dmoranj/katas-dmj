@@ -19,7 +19,7 @@
 	          (+ (* % w) x0)
 	          (+ (* % w) (- w x0))
 	        )
-	    (range (- limit) limit)) 
+	    (range (- limit) (+ 1 limit))) 
     )
   )
 
@@ -36,15 +36,19 @@
         d-cuad (Math/pow d 2)
         ]
     
-     (set (for [x x-axis 
+     (set 
+       (for [x x-axis 
 	          y y-axis 
 	          :when (<= (+ (Math/pow (- x x0) 2) (Math/pow (- y y0) 2)) d-cuad)
-	          ]               
-	      (cond
-          (= x x0) [:vertical (>= (- y y0) 0)]
-	        :else [(/ (- y y0) (- x x0)) (>= (- x x0) 0)]
-          )
-    )))
+	          ] 
+
+	       (cond
+           (= x x0) [:vertical (>= (- y y0) 0)]
+	         :else [(/ (- y y0) (- x x0)) (>= (- x x0) 0)]
+           )
+         )
+       )
+     )
   )
 
 (defn get-kata-results []
