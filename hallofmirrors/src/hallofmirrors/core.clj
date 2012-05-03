@@ -39,7 +39,10 @@
      (set 
        (for [x x-axis 
 	          y y-axis 
-	          :when (<= (+ (Math/pow (- x x0) 2) (Math/pow (- y y0) 2)) d-cuad)
+	          :when (and
+                   (<= (+ (Math/pow (- x x0) 2) (Math/pow (- y y0) 2)) d-cuad)
+                   (or (not= x x0) (not= y y0))
+                   )
 	          ] 
 
 	       (cond
