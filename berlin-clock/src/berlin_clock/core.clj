@@ -16,8 +16,7 @@
 			  (fd/in d (fd/interval 0 11))
 			  (fd/in e (fd/interval 0 4))
 		    (fd/eq
-		      (= (+ s (* b 18000) (* c 3600) (* d 300) (* e 60)) seconds)
-		      )
+		      (= (+ s (* b 18000) (* c 3600) (* d 300) (* e 60)) seconds))
 	      (== q [s b c d e])))))
 
 (defn alter-seconds [reasoning]
