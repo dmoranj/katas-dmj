@@ -22,11 +22,11 @@
 (defn alter-seconds [reasoning]
   (assoc reasoning 0 (-> reasoning (first) (unchecked-divide-int 2) (mod 2))))
 
-(defn berlinize [[n max]]
-    (concat (replicate n "Y") (replicate (- max n) "O")))
+(defn berlinize [[n max color]]
+    (concat (replicate n color) (replicate (- max n) "O")))
 
 (defn berlin-number [time]
-    (map berlinize (partition 2 (interleave time [1 4 4 11 4]))))
+    (map berlinize (partition 3 (interleave time [1 4 4 11 4] ["Y" "R" "R" "Y" "Y"]))))
 
 (defn berlin-clock [h m s] 
   (berlin-number (alter-seconds (first (berlin-reason h m s)))))
