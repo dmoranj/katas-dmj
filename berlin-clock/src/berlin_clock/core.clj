@@ -4,8 +4,7 @@
 (require '[clojure.core.logic.fd :as fd])
 
 (defn current-time [h m s]
-  (+ (* h 3600) (* m 60) s)
-  )
+  (+ (* h 3600) (* m 60) s))
 
 (defn berlin-reason [h m s]
   (let [seconds (current-time h m s)]
@@ -22,8 +21,7 @@
 	      (== q [s b c d e])))))
 
 (defn alter-seconds [reasoning]
-  (assoc (vec reasoning) 0 (-> reasoning (first) (unchecked-divide-int 2) (mod 2)))
-  )
+  (assoc (vec reasoning) 0 (-> reasoning (first) (unchecked-divide-int 2) (mod 2))))
 
 (defn berlinize [[n max]]
     (concat (replicate n "Y") (replicate (- max n) "O")))
