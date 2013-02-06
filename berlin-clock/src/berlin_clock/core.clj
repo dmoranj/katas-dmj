@@ -20,7 +20,7 @@
 	      (== q [s b c d e])))))
 
 (defn alter-seconds [reasoning]
-  (assoc (vec reasoning) 0 (-> reasoning (first) (unchecked-divide-int 2) (mod 2))))
+  (assoc reasoning 0 (-> reasoning (first) (unchecked-divide-int 2) (mod 2))))
 
 (defn berlinize [[n max]]
     (concat (replicate n "Y") (replicate (- max n) "O")))
