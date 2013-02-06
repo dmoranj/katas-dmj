@@ -10,7 +10,7 @@
 (defn berlin-reason [h m s]
   (let [seconds (current-time h m s)]
 		(run* [q] 
-		  (fresh [a s b c d e x y]
+		  (fresh [a s b c d e]
 			  (fd/in s (fd/interval 0 59))
 			  (fd/in b (fd/interval 0 4))
 			  (fd/in c (fd/interval 0 4))
@@ -21,11 +21,15 @@
 		      )
 	      (== q [s b c d e])))))
 
+(defn alter-seconds [reasoning]
+  (assoc (vec reasoning) 0 (-> reasoning (first) (unchecked-divide-int 2) (mod 2)))
+  )
+
 (defn berlinize [[n max]]
     (concat (replicate n "Y") (replicate (- max n) "O")))
 
 (defn berlin-number [time]
-    (drop 1 (map berlinize (partition 2 (interleave time [60 4 4 11 4])))))
+    (map berlinize (partition 2 (interleave time [1 4 4 11 4]))))
 
 (defn berlin-clock [h m s] 
-  (berlin-number (first(berlin-reason h m s))))
+  (berlin-number (alter-seconds (first (berlin-reason h m s)))))
